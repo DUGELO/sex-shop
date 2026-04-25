@@ -1,0 +1,43 @@
+<div class="home-page">
+  @if (heroProduct(); as hero) {
+    <section class="hero-grid" aria-label="Hero products">
+      <article class="feature-card">
+        <a class="feature-media" [routerLink]="['/products', hero.id]" [attr.aria-label]="storefrontConfig().content.productAriaPrefix + ' ' + hero.title" (click)="trackProductClick(hero, 'hero')">
+          <img [src]="hero.imageUrl" [alt]="hero.imageAlt" loading="lazy">
+        </a>
+
+        <div class="feature-content">
+          <p class="eyebrow">{{ storefrontConfig().content.heroEyebrow }}</p>
+          <h1>{{ hero.title }}</h1>
+          <p>{{ hero.shortDescription }}</p>
+          <a class="view-button" [routerLink]="['/products', hero.id]" (click)="trackProductClick(hero, 'hero')">{{ storefrontConfig().content.heroCtaLabel }}</a>
+        </div>
+      </article>
+
+      <div class="side-cards">
+        @for (product of quickPicks(); track product.id) {
+          <article class="product-card-shell product-card-shell-side">
+            <app-product-card [product]="product" variant="side"></app-product-card>
+          </article>
+        }
+      </div>
+    </section>
+
+    @if (popularProducts().length > 0) {
+      <section class="popular-section" aria-label="Popular products">
+        <h2>{{ storefrontConfig().content.popularSectionTitle }}</h2>
+
+        <div class="popular-grid">
+          @for (product of popularProducts(); track product.id) {
+            <app-product-card [product]="product"></app-product-card>
+          }
+        </div>
+      </section>
+    }
+  } @else {
+    <section class="empty-state" aria-live="polite">
+      <h2>{{ storefrontConfig().content.emptyCatalogTitle }}</h2>
+      <p>{{ storefrontConfig().content.emptyCatalogDescription }}</p>
+    </section>
+  }
+</div>

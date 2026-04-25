@@ -1,0 +1,23 @@
+<div class="container-header">
+    <header class="header-shell">
+        <a class="brand" routerLink="/" [attr.aria-label]="storefrontConfig().brand.homeAriaLabel">
+            @if (storefrontConfig().brand.logoPath) {
+            <img class="brand-logo" [src]="storefrontConfig().brand.logoPath" [alt]="storefrontConfig().brand.logoAlt">
+            } @else {
+            <span class="brand-name">{{ storefrontConfig().brand.name }}</span>
+            }
+        </a>
+
+        <form class="search" role="search" (submit)="preventSubmit($event)">
+            <span class="material-symbols-outlined search-icon" aria-hidden="true">search</span>
+            <input
+                type="search"
+                [value]="catalogService.searchTerm()"
+                (input)="onSearchInput($event)"
+                [placeholder]="storefrontConfig().content.searchPlaceholder"
+                [attr.aria-label]="storefrontConfig().content.searchAriaLabel"
+            >
+            <button type="submit">{{ storefrontConfig().content.searchButtonLabel }}</button>
+        </form>
+    </header>
+</div>

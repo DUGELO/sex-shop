@@ -1,0 +1,125 @@
+<section class="search-results-page">
+  <!-- MOBILE: results header + filter toggle -->
+  <div class="mobile-results-bar">
+    <h2 class="mobile-results-count">{{ totalResultsLabel() }}</h2>
+    <button type="button" class="mobile-filter-toggle" (click)="toggleMobileFilters()">
+      <span class="material-symbols-outlined" aria-hidden="true">tune</span>
+      {{ storefrontConfig().content.mobileFilterButtonLabel }}
+      <span class="material-symbols-outlined chevron" aria-hidden="true">expand_more</span>
+    </button>
+  </div>
+
+  <!-- BACKDROP for mobile drawer -->
+  @if (mobileFiltersOpen()) {
+    <div class="drawer-backdrop" (click)="toggleMobileFilters()"></div>
+  }
+
+  <!-- SIDEBAR (desktop) / DRAWER (mobile) -->
+  <aside
+    class="filters-sidebar"
+    [class.open]="mobileFiltersOpen()"
+    [attr.aria-label]="storefrontConfig().content.filtersTitle"
+  >
+    <div class="filters-header">
+      <h2>{{ storefrontConfig().content.filtersTitle }}</h2>
+    </div>
+
+    <div class="filter-group">
+      <input
+        type="search"
+        [value]="productService.searchTerm()"
+        (input)="productService.setSearchTerm(($any($event.target)).value)"
+        [placeholder]="storefrontConfig().content.filterSearchPlaceholder"
+        [attr.aria-label]="storefrontConfig().content.filterSearchPlaceholder"
+      >
+    </div>
+
+    <div class="filter-group">
+      <h3>{{ storefrontConfig().content.priceRangeTitle }}</h3>
+
+      <div class="price-current-value" aria-live="polite">
+        <span class="price-label">{{ storefrontConfig().content.priceRangeCurrentPrefix }}</span>
+        <span class="price-value">{{ formattedMinPrice() }}</span>
+      </div>
+
+      <div class="range-track-wrapper">
+        <input
+          class="price-range"
+          type="range"
+          [min]="priceRangeMin()"
+          [max]="priceRangeMax()"
+          step="10"
+          [value]="minPrice()"
+          (input)="setMinPrice($event)"
+          [attr.aria-label]="storefrontConfig().content.priceRangeAriaLabel"
+          [attr.aria-valuetext]="formattedMinPrice()"
+          [style.--range-percent.%]="priceRangePercent()"
+        >
+        <div class="range-labels">
+          <span>{{ formattedPriceRangeMinLabel() }}</span>
+          <span>{{ formattedPriceRangeMaxLabel() }}</span>
+        </div>
+      </div>
+
+      <div class="preset-chips">
+        <button type="button" class="preset-chip" [class.active]="minPrice() === priceRangeMin()" (click)="applyPricePreset(priceRangeMin())">{{ storefrontConfig().content.pricePresetAllLabel }}</button>
+        <button type="button" class="preset-chip" [class.active]="minPrice() === pricePresetMidValue()" (click)="applyPricePreset(pricePresetMidValue())">{{ storefrontConfig().content.pricePresetMidLabel }}</button>
+        <button type="button" class="preset-chip" [class.active]="minPrice() === pricePresetHighValue()" (click)="applyPricePreset(pricePresetHighValue())">{{ storefrontConfig().content.pricePresetHighLabel }}</button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <h3>{{ storefrontConfig().content.categoriesTitle }}</h3>
+      <div class="category-chips">
+        @for (category of categoryOptions(); track category) {
+          <button
+            type="button"
+            class="category-chip"
+            [class.active]="isCategorySelected(category)"
+            (click)="toggleCategory(category)"
+          >
+            {{ category }}
+          </button>
+        }
+      </div>
+    </div>
+
+
+    <button type="button" class="clear-filters-link" (click)="resetSearchExperience()">
+      {{ storefrontConfig().content.filtersResetLabel }}
+    </button>
+
+    <button type="button" class="mobile-apply-btn" (click)="toggleMobileFilters()">
+      {{ storefrontConfig().content.mobileFilterApplyLabel }}
+    </button>
+  </aside>
+
+  <!-- RESULTS -->
+  <section class="results-panel" aria-label="Filtered products">
+    <div class="results-toolbar">
+      <h2>{{ totalResultsLabel() }}</h2>
+      <label class="sort-control">
+        <span>{{ storefrontConfig().content.sortByLabel }}</span>
+        <select [value]="selectedSort()" (change)="setSortOption($event)">
+          @for (option of sortOptions(); track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </label>
+    </div>
+
+    @if (results().length > 0) {
+      <div class="search-results-grid">
+        @for (product of results(); track product.id) {
+          <app-product-card [product]="product" variant="compact"></app-product-card>
+        }
+      </div>
+    } @else {
+      <div class="empty-results" role="status">
+        <span class="material-symbols-outlined empty-icon" aria-hidden="true">search_off</span>
+        <h3>{{ storefrontConfig().content.emptyCatalogTitle }}</h3>
+        <p>{{ storefrontConfig().content.emptyCatalogDescription }}</p>
+      </div>
+    }
+  </section>
+</section>
