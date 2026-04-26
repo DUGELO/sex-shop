@@ -33,6 +33,7 @@ export interface ContactChannel {
 }
 
 export interface StorefrontContentConfig {
+  seeAllProductsLabel: string;
   searchPlaceholder: string;
   searchAriaLabel: string;
   heroEyebrow: string;
@@ -139,6 +140,7 @@ export const STOREFRONT_CONFIG: StorefrontConfig = {
     starColor: '#D4AF37',           // dourado
   },
   content: {
+    seeAllProductsLabel: 'Ver todos os produtos',
     searchPlaceholder: 'Explore seus desejos...',
     searchAriaLabel: 'Buscar produtos',
     heroEyebrow: 'Experiência sensorial',

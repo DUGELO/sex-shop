@@ -22,6 +22,24 @@ $card-transition: 180ms ease;
     flex-direction: column;
     gap: var(--spacing-xl);
 
+    .clear-filters-link {
+        border: 0;
+        background: transparent;
+        color: var(--color-primary-dark);
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: right;
+        padding: 0;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+
+        &:hover {
+            color: var(--color-primary);
+            font-weight: 900;
+        }
+    }
+
     .hero-grid {
         display: grid;
         grid-template-columns: 3fr 1fr;
@@ -34,9 +52,9 @@ $card-transition: 180ms ease;
             grid-template-columns: 1fr 1.15fr;
             min-height: 220px;
             max-height: 256px;
-            
-                transition: all 0.2s ease;
-            
+
+            transition: all 0.2s ease;
+
             &:hover {
                 transform: translateY(-5%);
             }
@@ -44,7 +62,7 @@ $card-transition: 180ms ease;
             .feature-media {
                 display: block;
                 height: 100%;
-                
+
 
                 img {
                     width: 100%;
@@ -61,7 +79,7 @@ $card-transition: 180ms ease;
                 justify-content: center;
                 gap: var(--spacing-sm);
                 padding: var(--spacing-md-lg);
-                
+
 
                 .eyebrow {
                     margin: 0;

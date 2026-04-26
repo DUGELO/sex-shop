@@ -1,4 +1,7 @@
 <div class="home-page">
+      <button type="button" class="clear-filters-link" (click)="allProducts.scrollIntoView({ block: 'center', inline: 'center', behavior: 'smooth' })">
+      {{ storefrontConfig().content.seeAllProductsLabel }}
+    </button>
   @if (heroProduct(); as hero) {
     <section class="hero-grid" aria-label="Hero products">
       <article class="feature-card">
@@ -42,7 +45,7 @@
   }
 
   <section class="all-products popular-section">
-  <h2>Todos os produtos</h2>
+  <h2 #allProducts>Todos os produtos</h2>
 
   <div class="grid popular-grid">
     @for (product of products(); track product.id) {
