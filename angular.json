@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "whitelabel": {
+    "sexyshop": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -62,10 +62,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "whitelabel:build:production"
+              "buildTarget": "sexyshop:build:production"
             },
             "development": {
-              "buildTarget": "whitelabel:build:development"
+              "buildTarget": "sexyshop:build:development"
             }
           },
           "defaultConfiguration": "development"

@@ -1,8 +1,8 @@
 {
-  "name": "whitelabel",
+  "name": "sexyshop",
   "version": "0.0.0",
   "scripts": {
-    "deploy": "ng deploy --base-href=/whitelabel/ --dir=dist/whitelabel/browser",
+    "deploy": "ng deploy --base-href=/sexyshop/ --dir=dist/sexyshop/browser",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",

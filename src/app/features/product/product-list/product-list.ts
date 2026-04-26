@@ -27,6 +27,7 @@ export class ProductList {
     });
   }
 
+  protected readonly products = computed(() => this.catalogService.products());
   protected readonly heroProduct = computed(() => {
     return this.catalogService.products()[0] ?? null;
   });

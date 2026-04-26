@@ -40,4 +40,14 @@
       <p>{{ storefrontConfig().content.emptyCatalogDescription }}</p>
     </section>
   }
+
+  <section class="all-products popular-section">
+  <h2>Todos os produtos</h2>
+
+  <div class="grid popular-grid">
+    @for (product of products(); track product.id) {
+      <app-product-card [product]="product"></app-product-card>
+    }
+  </div>
+</section>
 </div>
