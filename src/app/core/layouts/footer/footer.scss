@@ -17,6 +17,7 @@
         display: grid;
         gap: var(--spacing-sm);
         max-width: 260px;
+        text-align: center;
 
         .brand-mark {
             width: auto;
@@ -24,6 +25,11 @@
             display: grid;
             place-items: center;
             color: var(--color-primary);
+
+            img {
+                width: min(calc(100vh * 0.1), 100%);
+                height: auto;
+            }
 
             .material-symbols-outlined {
                 font-size: 42px;
